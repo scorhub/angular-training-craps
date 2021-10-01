@@ -3,8 +3,7 @@ import { Router } from "@angular/router"
 import { MatDialog } from '@angular/material/dialog'
 
 import { GameMechanics } from "../../services/gamemechanics.service"
-import { WinDialog } from '../dialogs/windialog/windialog.component';
-import { LoseDialog } from '../dialogs/losedialog/losedialog.component';
+import { MsgDialog } from '../msgdialog/msgdialog.component';
 
 @Component({
   selector: 'app-passline',
@@ -43,25 +42,28 @@ export class PassLine implements OnInit {
     }
 
     if (temp.status === "win"){
-        this.dialog.open(WinDialog, {
+        this.dialog.open(MsgDialog, {
             data: {
-                payOut: temp.pay,
-                credits: this.credits
+              header: "You won!",
+              message: "You won "+ temp.pay + " credits. Your credit balance is now " + this.credits + "."
             }
         })
     }
 
     if (temp.status === "lost"){
-        this.dialog.open(LoseDialog, {
+      if(temp.credits > 0){
+        this.dialog.open(MsgDialog, {
           data: {
             message: temp.message
           }
         })
+      }
     }
 
     if(this.credits < 1) {
-      this.dialog.open(LoseDialog, {
+      this.dialog.open(MsgDialog, {
           data: {
+              header: "Game over",
               message: "You have run out of credits. Thank you for playing."
           }
       })

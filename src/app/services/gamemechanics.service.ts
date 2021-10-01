@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 
+import { DataObject } from "../models/dataobject.model";
+
 @Injectable()
 
 export class GameMechanics {
-
     private game:string = "";
     private credits:number = 0;
     private bet:number = 0;
@@ -33,28 +34,9 @@ export class GameMechanics {
         this.game = "dontpass"
         this.credits = 100;
     }
-    
-    private emptyDataObject() {
-        let dataObject = {
-            message: "",
-            status: "",
-            dieA: 0,
-            dieB: 0,
-            total: 0,
-            pay: 0,
-            credits: this.credits
-        }
-        return dataObject
-    }
 
     private setData(msg:string, status:string){
-        let dataObject = this.emptyDataObject();
-        dataObject.message = msg;
-        dataObject.status = status;
-        dataObject.dieA = this.die1;
-        dataObject.dieB = this.die2;
-        dataObject.total = this.totalRoll;
-        dataObject.pay = this.payOut;
+        let dataObject:DataObject = new DataObject(msg, status, this.die1, this.die2, this.totalRoll, this.payOut, this.credits);
         return dataObject;
     }
 
@@ -62,6 +44,20 @@ export class GameMechanics {
         this.die1 = Math.floor(Math.random()*6)+1;
         this.die2 = Math.floor(Math.random()*6)+1;
         this.totalRoll = this.die1 + this.die2
+    }
+    
+    private win(message:string){
+        this.payOut = this.bet * 2;
+        this.credits += this.payOut
+        let data = this.setData(message, "win")
+        this.resetTable()
+        return data
+    }
+    
+    private lost(message:string){
+        let data = this.setData(message, "lost")
+        this.resetTable()
+        return data
     }
 
     private resetRolls(){
@@ -96,18 +92,12 @@ export class GameMechanics {
         if(this.rollCount === 0){
             this.rollCount++;
             if (this.totalRoll === 7 || this.totalRoll === 11){
-                this.payOut = this.bet * 2;
-                this.credits += this.payOut
-                let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You won " + this.payOut + " credits.";
-                let data = this.setData(msg, "win")
-                this.resetTable()
-                return data
+                let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You won " + this.bet * 2 + " credits.";
+                return this.win(msg)
             }
             if (this.totalRoll === 2 || this.totalRoll === 3 || this.totalRoll === 12){
                 let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You lost.";
-                let data = this.setData(msg, "lost")
-                this.resetTable()
-                return data
+                return this.lost(msg)
             }
             this.point = this.totalRoll;
             let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". Point set at " + this.totalRoll + ".";
@@ -116,18 +106,12 @@ export class GameMechanics {
                 return data
         }
         if(this.totalRoll === this.point){
-            this.payOut = this.bet * 2;
-            this.credits += this.payOut
-            let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You hit the point and won " + this.payOut + " credits.";
-            let data = this.setData(msg, "win")
-            this.resetTable()
-            return data
+            let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You hit the point and won " + this.bet * 2 + " credits.";
+            return this.win(msg)
         }
         if(this.totalRoll === 7){
             let msg:string = "You have rolled " + this.totalRoll + " and lost.";
-            let data = this.setData(msg, "lost")
-            this.resetTable()
-            return data
+            return this.lost(msg)
         }
         let msg:string = "You have rolled " + this.totalRoll + " and point is " + this.point+". Please try again.";
         let data = this.setData(msg, "point")
@@ -153,18 +137,12 @@ export class GameMechanics {
         if(this.rollCount === 0){
             this.rollCount++;
             if (this.totalRoll === 2 || this.totalRoll === 3){
-                this.payOut = this.bet * 2;
-                this.credits += this.payOut
-                let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You won " + this.payOut + " credits.";
-                let data = this.setData(msg, "win")
-                this.resetTable()
-                return data
+                let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You won " + this.bet * 2 + " credits.";
+                return this.win(msg)
             }
             if (this.totalRoll === 7 || this.totalRoll === 11){
                 let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You lost.";
-                let data = this.setData(msg, "lost")
-                this.resetTable()
-                return data
+                return this.lost(msg)
             }
             if (this.totalRoll === 12){
                 let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". Your bet is returned.";
@@ -181,20 +159,12 @@ export class GameMechanics {
                 return data
         }
         if(this.totalRoll === 7){
-            this.payOut = this.bet * 2;
-            this.credits += this.payOut
-            let msg:string = "You have rolled " + this.totalRoll + " and won " + this.payOut + " credits.";
-            let data = this.setData(msg, "win")
-            this.resetTable()
-            return data
+            let msg:string = "You have rolled " + this.totalRoll + " and won " + this.bet * 2 + " credits.";
+            return this.win(msg)
         }
         if(this.totalRoll === this.point){
-            this.payOut = this.bet * 2;
-            this.credits += this.payOut
             let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You hit the point and lost.";
-            let data = this.setData(msg, "lost")
-            this.resetTable()
-            return data
+            return this.lost(msg)
         }
         let msg:string = "You have rolled " + this.totalRoll + " and point is " + this.point+". Please try again.";
         let data = this.setData(msg, "point")

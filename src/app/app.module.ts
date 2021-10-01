@@ -12,8 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { GameMechanics } from './services/gamemechanics.service';
 
 import { StartScreen } from './components/startscreen/startscreen.component';
-import { WinDialog } from './components/dialogs/windialog/windialog.component';
-import { LoseDialog } from './components/dialogs/losedialog/losedialog.component';
+import { MsgDialog } from './components/msgdialog/msgdialog.component';
 import { PassLine } from './components/passline/passline.component';
 import { DontPass } from './components/dontpass/dontpass.component';
 
@@ -21,8 +20,7 @@ import { DontPass } from './components/dontpass/dontpass.component';
   declarations: [
     AppComponent,
     StartScreen,
-    WinDialog,
-    LoseDialog,
+    MsgDialog,
     PassLine,
     DontPass
   ],

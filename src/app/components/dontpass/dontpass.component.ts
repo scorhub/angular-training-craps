@@ -3,8 +3,7 @@ import { Router } from "@angular/router"
 import { MatDialog } from '@angular/material/dialog'
 
 import { GameMechanics } from "../../services/gamemechanics.service"
-import { WinDialog } from '../dialogs/windialog/windialog.component';
-import { LoseDialog } from '../dialogs/losedialog/losedialog.component';
+import { MsgDialog } from '../msgdialog/msgdialog.component';
 
 @Component({
   selector: 'app-dontpass',
@@ -39,37 +38,51 @@ export class DontPass implements OnInit {
       return
     }
     
-    if (this.canBet) {
-      this.canBet = false
+    if(this.canBet){
+    this.canBet = false
     }
-
+    
     if (temp.status === "point") {
       return
     }
 
     if (temp.status === "win"){
-        this.dialog.open(WinDialog, {
+        this.dialog.open(MsgDialog, {
             data: {
-                payOut: temp.pay,
-                credits: this.credits
+                header: "You won!",
+                message: "You won "+ temp.pay + " credits. Your credit balance is now " + this.credits + "."
             }
         })
         this.canBet = true
     }
 
     if (temp.status === "lost"){
-        this.dialog.open(LoseDialog, {
+      if(temp.credits > 0){
+        this.dialog.open(MsgDialog, {
           data: {
+            header: "You lost",
             message: temp.message
           }
+        })
+      }
+      this.canBet = true
+    }
+
+    if (temp.status === "push"){
+        this.dialog.open(MsgDialog, {
+            data: {
+                header: "You pushed",
+                message: temp.message
+            }
         })
         this.canBet = true
     }
 
     if(this.credits < 1) {
-      this.dialog.open(LoseDialog, {
+      this.dialog.open(MsgDialog, {
           data: {
-              message: "You have run out of credits. Thank you for playing."
+              header: "Game over",
+              message: temp.message + "\n" + "You have run out of credits. Thank you for playing."
           }
       })
       this._router.navigate(['/craps'])
