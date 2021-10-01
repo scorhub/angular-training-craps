@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 
 export class GameMechanics {
 
+    private game:string = "";
     private credits:number = 0;
     private bet:number = 0;
     private rollCount:number = 0;
@@ -13,8 +14,17 @@ export class GameMechanics {
     private totalRoll:number = 0;
     private point:number = 0
 
+    checkGameStatus(){
+        let gameStatus = {
+            game: this.game,
+            credits: this.credits
+        }
+        return gameStatus
+    }
+
     startPassLine(){
         this.resetTable()
+        this.game = "passline"
         this.credits = 100;
     }
     
@@ -106,7 +116,7 @@ export class GameMechanics {
         if(this.totalRoll === this.point){
             this.payOut = this.bet * 2;
             this.credits += this.payOut
-            let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". Your hit the point and won " + this.payOut + " credits.";
+            let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You hit the point and won " + this.payOut + " credits.";
             let data = this.setData(msg, "win")
             this.resetTable()
             return data

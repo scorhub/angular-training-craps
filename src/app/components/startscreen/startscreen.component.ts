@@ -15,8 +15,8 @@ export class StartScreen implements OnInit {
   ngOnInit(): void {
   }
 
-  startGame() {
+  startPassLine() {
     this._game.startPassLine();
-    this._router.navigate(['/craps/passbets'])
+    this._router.navigate(['/craps/passline'])
   }
 }

@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { StartScreen } from './components/startscreen/startscreen.component';
-import { GameScreen } from './components/gamescreen/gamescreen.component';
+import { PassLine } from './components/passline/passline.component';
 
 const routes: Routes = [
   {
   path:"craps", component: StartScreen
   },
   {
-    path:"craps/passbets", component: GameScreen
+    path:"craps/passline", component: PassLine
   },
   {
     path:"", redirectTo:"craps", pathMatch:"full"
