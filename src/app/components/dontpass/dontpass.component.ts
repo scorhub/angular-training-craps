@@ -27,6 +27,10 @@ export class DontPass implements OnInit {
     this.credits = check.credits
   }
 
+  back(){
+    this._router.navigate(['/craps'])
+  }
+
   roll() {
     let temp = this._game.runDontPass(this.bet)
     

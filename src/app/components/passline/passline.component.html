@@ -1,12 +1,22 @@
 <div style="text-align: center;">
     <h2>Craps: Pass Line</h2>
-    <h4>Game Screen</h4>
-    <p>Your credits: {{credits}}</p>
-    <br/>
+    <hr/>
+    <div>
+        <h3>Rules:</h3>
+        <p>Roll two dice. For come-outs of 7 and 11, you win (double the bet).</p>
+        <p>If come-out is 2, 3, or 12, you lose your bet.</p>
+        <p>If the roll is any other value, it establishes a point.</p>
+        <p>If, with a point established, that point is rolled again before a 7, the bet wins.</p>
+        <p>If, with a point established, a 7 is rolled before the point is rolled again ("seven out"), the bet loses.</p>
+    </div>
+    <hr/>
+    <div *ngIf="!playing">
+        <button mat-raised-button color="primary" (click)="back()">Return to hall</button>
+    </div>
+    <p><b>Your credits:</b> {{credits}}</p>
     <p>Game says: {{message}}</p>
-    <br/>
     <p>Place bet: {{bet}}</p>
     <mat-slider [min]=0 [max]="credits" [(ngModel)]="bet"></mat-slider>
     <br/>
-    <button mat-raised-button (click)="roll()">Throw the dice</button>
+    <button mat-raised-button (click)="roll()"><b>Throw the dice</b></button>
 </div>

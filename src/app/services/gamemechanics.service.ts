@@ -23,16 +23,18 @@ export class GameMechanics {
         return gameStatus
     }
 
+    setCredits(){
+        this.credits = 100;
+    }
+
     startPassLine(){
         this.resetTable()
         this.game = "passline"
-        this.credits = 100;
     }
 
     startDontPass(){
         this.resetTable()
         this.game = "dontpass"
-        this.credits = 100;
     }
 
     private setData(msg:string, status:string){

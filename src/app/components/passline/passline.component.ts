@@ -17,6 +17,7 @@ export class PassLine implements OnInit {
   public message:string = "Place your bet.";
   public credits:number = 0;
   public bet:number = 0
+  public playing:boolean = false
 
   ngOnInit(): void {
     let check = this._game.checkGameStatus()
@@ -24,6 +25,10 @@ export class PassLine implements OnInit {
       this._router.navigate(['/craps'])
     }
     this.credits = check.credits
+  }
+
+  back(){
+    this._router.navigate(['/craps'])
   }
 
   roll() {
@@ -37,20 +42,24 @@ export class PassLine implements OnInit {
       return
     }
 
+    this.playing = true
+
     if (temp.status === "point") {
       return
     }
 
     if (temp.status === "win"){
-        this.dialog.open(MsgDialog, {
-            data: {
-              header: "You won!",
-              message: "You won "+ temp.pay + " credits. Your credit balance is now " + this.credits + "."
-            }
-        })
+      this.playing = false
+      this.dialog.open(MsgDialog, {
+          data: {
+            header: "You won!",
+            message: "You won "+ temp.pay + " credits. Your credit balance is now " + this.credits + "."
+          }
+      })
     }
 
     if (temp.status === "lost"){
+      this.playing = false
       if(temp.credits > 0){
         this.dialog.open(MsgDialog, {
           data: {
