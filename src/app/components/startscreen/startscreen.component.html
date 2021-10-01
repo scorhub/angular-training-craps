@@ -1,1 +1,12 @@
-<p>startscreen works!</p>
+<div style="text-align: center;">
+    <h2>Craps: Pass line</h2>
+    <h4>Rules:</h4>
+    <p>You have 100 credits.</p>
+    <p>Roll two dice. For come-outs of 7 and 11, you win (double the bet).</p>
+    <p>If come-out is 2, 3, or 12, you lose your bet.</p>
+    <p>If the roll is any other value, it establishes a point.</p>
+    <p>If, with a point established, that point is rolled again before a 7, the bet wins.</p>
+    <p>If, with a point established, a 7 is rolled before the point is rolled again ("seven out"), the bet loses.</p>
+    <br/>
+    <button mat-raised-button color="primary" (click)="startGame()">Start</button>
+</div>

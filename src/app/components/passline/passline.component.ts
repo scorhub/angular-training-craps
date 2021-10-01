@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './passline.component.html',
   styleUrls: ['./passline.component.css']
 })
-export class PasslineComponent implements OnInit {
+export class PassLineComponent implements OnInit {
 
   constructor() { }
 

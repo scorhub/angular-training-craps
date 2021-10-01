@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LosedialogComponent } from './losedialog.component';
+import { LoseDialog } from './losedialog.component';
 
-describe('LosedialogComponent', () => {
-  let component: LosedialogComponent;
-  let fixture: ComponentFixture<LosedialogComponent>;
+describe('LoseDialog', () => {
+  let component: LoseDialog;
+  let fixture: ComponentFixture<LoseDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LosedialogComponent ]
+      declarations: [ LoseDialog ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LosedialogComponent);
+    fixture = TestBed.createComponent(LoseDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PasslineComponent } from './passline.component';
+import { PassLineComponent } from './passline.component';
 
-describe('PasslineComponent', () => {
-  let component: PasslineComponent;
-  let fixture: ComponentFixture<PasslineComponent>;
+describe('PassLineComponent', () => {
+  let component: PassLineComponent;
+  let fixture: ComponentFixture<PassLineComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PasslineComponent ]
+      declarations: [ PassLineComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PasslineComponent);
+    fixture = TestBed.createComponent(PassLineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './losedialog.component.html',
   styleUrls: ['./losedialog.component.css']
 })
-export class LosedialogComponent implements OnInit {
+export class LoseDialog implements OnInit {
 
   constructor() { }
 

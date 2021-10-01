@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './windialog.component.html',
   styleUrls: ['./windialog.component.css']
 })
-export class WindialogComponent implements OnInit {
+export class WinDialog implements OnInit {
 
   constructor() { }
 
