@@ -1,1 +1,13 @@
-<p>dontpass works!</p>
+<div style="text-align: center;">
+    <h2>Craps: Don't Line</h2>
+    <h4>Game Screen</h4>
+    <p>Your credits: {{credits}}</p>
+    <br/>
+    <p>Game says: {{message}}</p>
+    <br/>
+    <div *ngIf="canBet">
+        <p>Place bet: {{bet}}</p>
+        <mat-slider [min]=0 [max]="credits" [(ngModel)]="bet"></mat-slider>
+    </div>
+    <button mat-raised-button (click)="roll()">Throw the dice</button>
+</div>

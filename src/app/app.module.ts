@@ -15,7 +15,7 @@ import { StartScreen } from './components/startscreen/startscreen.component';
 import { WinDialog } from './components/dialogs/windialog/windialog.component';
 import { LoseDialog } from './components/dialogs/losedialog/losedialog.component';
 import { PassLine } from './components/passline/passline.component';
-import { DontpassComponent } from './components/dontpass/dontpass.component';
+import { DontPass } from './components/dontpass/dontpass.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { DontpassComponent } from './components/dontpass/dontpass.component';
     WinDialog,
     LoseDialog,
     PassLine,
-    DontpassComponent
+    DontPass
   ],
   imports: [
     BrowserModule,

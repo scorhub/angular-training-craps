@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DontpassComponent } from './dontpass.component';
+import { DontPass } from './dontpass.component';
 
-describe('DontpassComponent', () => {
-  let component: DontpassComponent;
-  let fixture: ComponentFixture<DontpassComponent>;
+describe('DontPass', () => {
+  let component: DontPass;
+  let fixture: ComponentFixture<DontPass>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DontpassComponent ]
+      declarations: [ DontPass ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DontpassComponent);
+    fixture = TestBed.createComponent(DontPass);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

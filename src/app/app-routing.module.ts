@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { StartScreen } from './components/startscreen/startscreen.component';
 import { PassLine } from './components/passline/passline.component';
+import { DontPass } from './components/dontpass/dontpass.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
   },
   {
     path:"craps/passline", component: PassLine
+  },
+  {
+    path:"craps/dontpass", component: DontPass
   },
   {
     path:"", redirectTo:"craps", pathMatch:"full"

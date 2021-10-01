@@ -27,6 +27,12 @@ export class GameMechanics {
         this.game = "passline"
         this.credits = 100;
     }
+
+    startDontPass(){
+        this.resetTable()
+        this.game = "dontpass"
+        this.credits = 100;
+    }
     
     private emptyDataObject() {
         let dataObject = {
@@ -72,13 +78,11 @@ export class GameMechanics {
     }
 
     runPassLine(bet:number){
-
         if (this.rollCount === 0 && bet < 1) {
             let msg:string = "Starting bet cannot be 0.";
             let data = this.setData(msg, "error")
             return data
         }
-        
         if (bet > this.credits) {
             let msg:string = "Cannot bet more than you have credits! Your bet: " + bet + ". Your credits: " + this.credits;
             let data = this.setData(msg, "error")
@@ -87,7 +91,6 @@ export class GameMechanics {
 
         this.bet += bet;
         this.credits -= bet;
-        
         this.rollDice()
         
         if(this.rollCount === 0){
@@ -112,7 +115,6 @@ export class GameMechanics {
                 this.resetRolls()
                 return data
         }
-
         if(this.totalRoll === this.point){
             this.payOut = this.bet * 2;
             this.credits += this.payOut
@@ -121,14 +123,79 @@ export class GameMechanics {
             this.resetTable()
             return data
         }
-
         if(this.totalRoll === 7){
             let msg:string = "You have rolled " + this.totalRoll + " and lost.";
             let data = this.setData(msg, "lost")
             this.resetTable()
             return data
         }
+        let msg:string = "You have rolled " + this.totalRoll + " and point is " + this.point+". Please try again.";
+        let data = this.setData(msg, "point")
+        return data
+    }
 
+    runDontPass(bet:number){
+        if (this.rollCount === 0 && bet < 1) {
+            let msg:string = "Starting bet cannot be 0.";
+            let data = this.setData(msg, "error")
+            return data
+        }
+        if (bet > this.credits) {
+            let msg:string = "Cannot bet more than you have credits! Your bet: " + bet + ". Your credits: " + this.credits;
+            let data = this.setData(msg, "error")
+            return data
+        }
+
+        this.bet += bet;
+        this.credits -= bet;
+        this.rollDice()
+        
+        if(this.rollCount === 0){
+            this.rollCount++;
+            if (this.totalRoll === 2 || this.totalRoll === 3){
+                this.payOut = this.bet * 2;
+                this.credits += this.payOut
+                let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You won " + this.payOut + " credits.";
+                let data = this.setData(msg, "win")
+                this.resetTable()
+                return data
+            }
+            if (this.totalRoll === 7 || this.totalRoll === 11){
+                let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You lost.";
+                let data = this.setData(msg, "lost")
+                this.resetTable()
+                return data
+            }
+            if (this.totalRoll === 12){
+                let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". Your bet is returned.";
+                this.payOut = this.bet;
+                this.credits += this.payOut
+                let data = this.setData(msg, "push")
+                this.resetTable()
+                return data
+            }
+            this.point = this.totalRoll;
+            let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". Point set at " + this.totalRoll + ".";
+                let data = this.setData(msg, "point")
+                this.resetRolls()
+                return data
+        }
+        if(this.totalRoll === 7){
+            this.payOut = this.bet * 2;
+            this.credits += this.payOut
+            let msg:string = "You have rolled " + this.totalRoll + " and won " + this.payOut + " credits.";
+            let data = this.setData(msg, "win")
+            this.resetTable()
+            return data
+        }
+        if(this.totalRoll === this.point){
+            this.payOut = this.bet * 2;
+            this.credits += this.payOut
+            let msg:string = "You have rolled " + this.die1 + " and " + this.die2 + ". You hit the point and lost.";
+            let data = this.setData(msg, "lost")
+            this.resetTable()
+            return data
+        }
         let msg:string = "You have rolled " + this.totalRoll + " and point is " + this.point+". Please try again.";
         let data = this.setData(msg, "point")
         return data

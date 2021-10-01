@@ -19,4 +19,9 @@ export class StartScreen implements OnInit {
     this._game.startPassLine();
     this._router.navigate(['/craps/passline'])
   }
+
+  startDontPass() {
+    this._game.startDontPass();
+    this._router.navigate(['/craps/dontpass'])
+  }
 }
