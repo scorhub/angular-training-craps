@@ -29,9 +29,6 @@ export class DontPass implements OnInit {
   }
 
   roll() {
-    if (this.canBet) {
-      this.canBet = false
-    }
     let temp = this._game.runDontPass(this.bet)
     
     this.message = temp.message;
@@ -40,6 +37,10 @@ export class DontPass implements OnInit {
 
     if (temp.status === "error"){
       return
+    }
+    
+    if (this.canBet) {
+      this.canBet = false
     }
 
     if (temp.status === "point") {
@@ -58,9 +59,9 @@ export class DontPass implements OnInit {
 
     if (temp.status === "lost"){
         this.dialog.open(LoseDialog, {
-            data: {
-                credits: this.credits
-            }
+          data: {
+            message: temp.message
+          }
         })
         this.canBet = true
     }

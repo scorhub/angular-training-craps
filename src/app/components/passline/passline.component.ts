@@ -53,9 +53,9 @@ export class PassLine implements OnInit {
 
     if (temp.status === "lost"){
         this.dialog.open(LoseDialog, {
-            data: {
-                credits: this.credits
-            }
+          data: {
+            message: temp.message
+          }
         })
     }
 
